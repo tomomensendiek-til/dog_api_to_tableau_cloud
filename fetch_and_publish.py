@@ -15,8 +15,7 @@ from tableauhyperapi import (
 from tableauserverclient import (
     PersonalAccessTokenAuth,
     Server,
-    DatasourceItem,
-    PublishMode
+    DatasourceItem
 )
 
 
@@ -98,7 +97,7 @@ def publish_to_tableau():
         published_datasource = server.datasources.publish(
             datasource,
             HYPER_FILE,
-            mode=PublishMode.Overwrite
+            mode="Overwrite"
         )
         print("Publish complete!")
 
