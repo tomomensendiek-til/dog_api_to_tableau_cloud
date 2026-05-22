@@ -33,6 +33,7 @@ TABLEAU_PROJECT_ID = os.environ["TABLEAU_PROJECT_ID"]
 DATASOURCE_NAME = "dog_api_output"
 
 def fetch_dog_data():
+    print("Fetching dog image...")
     response = requests.get(DOG_API_URL)
     response.raise_for_status()
     data = response.json()
@@ -46,6 +47,7 @@ def fetch_dog_data():
     }
 
 def create_hyper_file(dog_data):
+    print("Creating Hyper file...")
     if os.path.exists(HYPER_FILE):
         os.remove(HYPER_FILE)
     table_definition = TableDefinition(
@@ -102,15 +104,9 @@ def publish_to_tableau():
         print("Publish complete!")
 
 def main():
-    print("Fetching dog image...")
     dog_data = fetch_dog_data()
-    print(f"Breed: {dog_data['breed']}")
-    print(f"Image URL: {dog_data['image_url']}")
-    print("Creating Hyper file...")
     create_hyper_file(dog_data)
-    print("Publishing to Tableau Cloud...")
     publish_to_tableau()
-    print("Done!")
 
 if __name__ == "__main__":
     main()
